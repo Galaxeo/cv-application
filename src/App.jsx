@@ -6,6 +6,21 @@ import "./App.css";
 import Edit from "./components/Edit.jsx";
 import Contact from "./components/Contact.jsx";
 import Education from "./components/Education";
+import Category from "./components/Category";
+import Skills from "./components/Skills";
+import Experience from "./components/Experience";
+import { v4 as uuidv4 } from "uuid";
+
+// TODO:
+// need a button that can generate a component and a display component when clicked
+
+// have the button, now need to create the function that generates those components. This function will likely be a part of the app.jsx, as we need to generate these components in the parent component
+
+// in order to generate components, we can use a state variable that contains a list of the components that we want to generate, which gets passed into a .map function to generate all the components we want. then, we have the add component function, that creates the new component and then calls the setter function. in order to ensure that we don't overlap keys, we can ensure that the key being used for that component is generated with the name of that component in mind (e.g. key={categoryName} or something)
+
+// now to remove these components, we can filter that component by looking for the key out of the list of components that we want to generate so that we can re-render the DOM.
+
+// within a experience component, we want to have the title, company, date, and description
 
 function App() {
   const [fullName, setFullName] = useState("Justin Cheok");
@@ -17,6 +32,8 @@ function App() {
   const [coursework, setCoursework] = useState(
     "Data Structures and Algorithms"
   );
+  const [skills, setSkills] = useState("Programming");
+  const [experience, setExperience] = useState([]);
   const changeName = (e) => {
     setFullName(e.target.value);
   };
@@ -37,6 +54,37 @@ function App() {
   };
   const changeCoursework = (e) => {
     setCoursework(e.target.value);
+  };
+  const changeSkills = (e) => {
+    setSkills(e.target.value);
+  };
+  // Also stores the array of data?
+  const addExperience = (e) => {
+    if (experience.length == 4) {
+      alert("Max 4 experiences!");
+      return null;
+    }
+    let newArr = [...experience, {}];
+    console.log(newArr);
+    setExperience(newArr);
+  };
+  const removeExperience = (e) => {
+    let removed = [...experience];
+    removed.pop();
+    console.log(removed.length);
+    setExperience(removed);
+  };
+  const changeExperience = (ind, data) => {
+    // Figure out how to update the data between this and the input changes
+    let adjusted = [...experience];
+    for (let i = 0; i < adjusted.length; i++) {
+      if (i == ind) {
+        adjusted[i] == data;
+        console.log("Here");
+      }
+      console.log(adjusted[i]);
+    }
+    console.log(adjusted);
   };
   return (
     <>
@@ -61,6 +109,19 @@ function App() {
             coursework={coursework}
             changeCoursework={changeCoursework}
           ></Education>
+          <Skills skills={skills} changeSkills={changeSkills}></Skills>
+          {/* Goal right now is to be able to store the data of each experience in an array*/}
+          {experience.map((exp, index) => {
+            return (
+              <Experience
+                key={index}
+                index={index}
+                changeData={changeExperience}
+              ></Experience>
+            );
+          })}
+          <button onClick={addExperience}>Add</button>
+          <button onClick={removeExperience}>Remove</button>
         </div>
         <div className="preview">
           <div className="header">

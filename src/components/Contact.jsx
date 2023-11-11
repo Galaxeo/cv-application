@@ -50,11 +50,9 @@ function Contact({
     );
   } else {
     return (
-      <>
-        <h3>
-          Contact Information<Edit status={display} func={changeDisplay}></Edit>
-        </h3>
-      </>
+      <h3>
+        Contact Information<Edit status={display} func={changeDisplay}></Edit>
+      </h3>
     );
   }
 }
