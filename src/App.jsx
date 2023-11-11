@@ -2,6 +2,7 @@ import { useState, useId } from "react";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import DynamicComponent from "./DynamicComponent";
 function Input({ clas, content, func }) {
   const id = useId();
   return (
@@ -24,9 +25,17 @@ function ContactForm(props) {
     <>
       <div className="formCont">
         <h2>Contact</h2>
-        <Input clas="fullName" content="Full Name" func={props.func}></Input>
-        {/* <Input clas="location" content="Location"></Input>
-        <Input clas="phoneNum" content="Phone Number"></Input>
+        <Input
+          clas="fullName"
+          content="Full Name"
+          func={props.nameFunc}
+        ></Input>
+        <Input
+          clas="location"
+          content="Location"
+          func={props.contactFunc}
+        ></Input>
+        {/* <Input clas="phoneNum" content="Phone Number"></Input>
         <Input clas="email" content="Email Address"></Input>
         <Input
           clas="link"
@@ -48,11 +57,12 @@ function EducationForm() {
     </>
   );
 }
-function Preview({ name }) {
+function Preview({ name, contact }) {
   return (
     <>
       <div>
         <p>{name}</p>
+        <p>{contact}</p>
       </div>
     </>
   );
@@ -60,18 +70,26 @@ function Preview({ name }) {
 
 function App() {
   const [fullName, setFullName] = useState("Justin Cheok");
+  const [contact, setContact] = useState("example@email.com");
   const changeName = (name) => {
     setFullName(name);
+  };
+  const changeContact = (contact) => {
+    setContact(contact);
   };
   return (
     <>
       <div className="layout">
         <div className="form">
-          <ContactForm func={changeName}></ContactForm>
+          <ContactForm
+            nameFunc={changeName}
+            contactFunc={changeContact}
+          ></ContactForm>
           <EducationForm></EducationForm>
+          <DynamicComponent></DynamicComponent>
         </div>
         <div className="preview">
-          <Preview name={fullName}></Preview>
+          <Preview name={fullName} contact={contact}></Preview>
         </div>
       </div>
     </>
