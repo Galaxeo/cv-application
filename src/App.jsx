@@ -5,6 +5,7 @@ import viteLogo from "/vite.svg";
 import "./App.css";
 import Edit from "./components/Edit.jsx";
 import Contact from "./components/Contact.jsx";
+import Education from "./components/Education";
 
 function App() {
   const [fullName, setFullName] = useState("Justin Cheok");
@@ -52,27 +53,14 @@ function App() {
             link={link}
             changeLink={changeLink}
           ></Contact>
-          <div className="educationForm">
-            <h3>Education</h3>
-            <InputComponent
-              inputValue={schoolName}
-              onInputChange={changeSchool}
-              label="School Name"
-              id=""
-            ></InputComponent>
-            <InputComponent
-              inputValue={major}
-              onInputChange={changeMajor}
-              label="Major"
-              id=""
-            ></InputComponent>
-            <InputComponent
-              inputValue={coursework}
-              onInputChange={changeCoursework}
-              label="Coursework"
-              id=""
-            ></InputComponent>
-          </div>
+          <Education
+            school={schoolName}
+            changeSchool={changeSchool}
+            major={major}
+            changeMajor={changeMajor}
+            coursework={coursework}
+            changeCoursework={changeCoursework}
+          ></Education>
         </div>
         <div className="preview">
           <div className="header">

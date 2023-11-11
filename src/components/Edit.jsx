@@ -1,7 +1,8 @@
-function Edit({ status }) {
+import { useState } from "react";
+function Edit({ status, func }) {
   return (
     <>
-      <button>{status ? "Edit" : "Done"}</button>
+      <button onClick={func}>{status ? "Done" : "Edit"}</button>
     </>
   );
 }
