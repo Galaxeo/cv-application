@@ -1,95 +1,104 @@
 import { useState, useId } from "react";
+import { InputComponent, DisplayComponent } from "./components/Io";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
-import DynamicComponent from "./DynamicComponent";
-function Input({ clas, content, func }) {
-  const id = useId();
-  return (
-    <div className="inputCont">
-      <label htmlFor={id}>{content}</label>
-      <input
-        type="text"
-        className="clas"
-        id={id}
-        onChange={(e) => {
-          func(e.target.value);
-        }}
-      />
-    </div>
-  );
-}
-
-function ContactForm(props) {
-  return (
-    <>
-      <div className="formCont">
-        <h2>Contact</h2>
-        <Input
-          clas="fullName"
-          content="Full Name"
-          func={props.nameFunc}
-        ></Input>
-        <Input
-          clas="location"
-          content="Location"
-          func={props.contactFunc}
-        ></Input>
-        {/* <Input clas="phoneNum" content="Phone Number"></Input>
-        <Input clas="email" content="Email Address"></Input>
-        <Input
-          clas="link"
-          content="Miscellaneous Link (e.g. portfolio)"
-        ></Input> */}
-      </div>
-    </>
-  );
-}
-function EducationForm() {
-  return (
-    <>
-      <div className="formCont">
-        <h2>Education</h2>
-        {/* <Input clas="school" content="School Name"></Input>
-        <Input clas="major" content="Major(s)"></Input>
-        <Input clas="coursework" content="Relevant Coursework"></Input> */}
-      </div>
-    </>
-  );
-}
-function Preview({ name, contact }) {
-  return (
-    <>
-      <div>
-        <p>{name}</p>
-        <p>{contact}</p>
-      </div>
-    </>
-  );
-}
+import Edit from "./components/Edit.jsx";
+import Contact from "./components/Contact.jsx";
 
 function App() {
   const [fullName, setFullName] = useState("Justin Cheok");
+  const [location, setLocation] = useState("Brooklyn, NY");
   const [contact, setContact] = useState("example@email.com");
-  const changeName = (name) => {
-    setFullName(name);
+  const [link, setLink] = useState("cheok.works");
+  const [schoolName, setSchool] = useState("New York University");
+  const [major, setMajor] = useState("Computer Science");
+  const [coursework, setCoursework] = useState(
+    "Data Structures and Algorithms"
+  );
+  const changeName = (e) => {
+    setFullName(e.target.value);
   };
-  const changeContact = (contact) => {
-    setContact(contact);
+  const changeContact = (e) => {
+    setContact(e.target.value);
+  };
+  const changeLocation = (e) => {
+    setLocation(e.target.value);
+  };
+  const changeLink = (e) => {
+    setLink(e.target.value);
+  };
+  const changeSchool = (e) => {
+    setSchool(e.target.value);
+  };
+  const changeMajor = (e) => {
+    setMajor(e.target.value);
+  };
+  const changeCoursework = (e) => {
+    setCoursework(e.target.value);
   };
   return (
     <>
       <div className="layout">
         <div className="form">
-          <ContactForm
-            nameFunc={changeName}
-            contactFunc={changeContact}
-          ></ContactForm>
-          <EducationForm></EducationForm>
-          <DynamicComponent></DynamicComponent>
+          <h2>Resume Maker</h2>
+          <Contact
+            fullName={fullName}
+            changeName={changeName}
+            contact={contact}
+            changeContact={changeContact}
+            location={location}
+            changeLocation={changeLocation}
+            link={link}
+            changeLink={changeLink}
+          ></Contact>
+          <div className="educationForm">
+            <h3>Education</h3>
+            <InputComponent
+              inputValue={schoolName}
+              onInputChange={changeSchool}
+              label="School Name"
+              id=""
+            ></InputComponent>
+            <InputComponent
+              inputValue={major}
+              onInputChange={changeMajor}
+              label="Major"
+              id=""
+            ></InputComponent>
+            <InputComponent
+              inputValue={coursework}
+              onInputChange={changeCoursework}
+              label="Coursework"
+              id=""
+            ></InputComponent>
+          </div>
         </div>
         <div className="preview">
-          <Preview name={fullName} contact={contact}></Preview>
+          <div className="header">
+            <DisplayComponent
+              type="Name"
+              inputValue={fullName}
+            ></DisplayComponent>
+            <DisplayComponent
+              type="Contact"
+              inputValue={contact}
+            ></DisplayComponent>
+            <DisplayComponent
+              type="Location"
+              inputValue={location}
+            ></DisplayComponent>
+            <DisplayComponent type="Link" inputValue={link}></DisplayComponent>
+          </div>
+          <DisplayComponent
+            type="School"
+            inputValue={schoolName}
+          ></DisplayComponent>
+          <DisplayComponent type="Major" inputValue={major}></DisplayComponent>
+          <DisplayComponent
+            type="Relevant Coursework"
+            inputValue={coursework}
+          ></DisplayComponent>
         </div>
       </div>
     </>
