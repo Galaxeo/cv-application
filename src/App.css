@@ -30,3 +30,6 @@
   flex-direction: column;
   text-align: left;
 }
+.largeText {
+  height: 150px;
+}

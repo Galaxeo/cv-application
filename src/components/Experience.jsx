@@ -10,6 +10,7 @@ function Experience({ title, company, date, description, index, changeData }) {
     console.log(index);
   }
   if (display) {
+    console.log(title);
     return (
       <>
         <h3>
@@ -17,7 +18,30 @@ function Experience({ title, company, date, description, index, changeData }) {
         </h3>
         <InputComponent
           inputValue={title}
-          onInputChange={(e) => changeData(index, e.target.value)}
+          onInputChange={(e) => changeData(index, "Title", e.target.value)}
+          label="Title"
+          id="expTitle"
+        ></InputComponent>
+        <InputComponent
+          inputValue={company}
+          onInputChange={(e) => changeData(index, "Company", e.target.value)}
+          label="Company"
+          id="expCompany"
+        ></InputComponent>
+        <InputComponent
+          inputValue={date}
+          onInputChange={(e) => changeData(index, "Date", e.target.value)}
+          label="Date"
+          id="expDate"
+        ></InputComponent>
+        <InputComponent
+          inputValue={description}
+          onInputChange={(e) =>
+            changeData(index, "Description", e.target.value)
+          }
+          label="Description"
+          id="expDescription"
+          type="textarea"
         ></InputComponent>
       </>
     );

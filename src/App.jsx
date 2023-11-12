@@ -71,20 +71,17 @@ function App() {
   const removeExperience = (e) => {
     let removed = [...experience];
     removed.pop();
-    console.log(removed.length);
+    console.log(removed);
     setExperience(removed);
   };
-  const changeExperience = (ind, data) => {
-    // Figure out how to update the data between this and the input changes
+  const changeExperience = (ind, property, data) => {
     let adjusted = [...experience];
     for (let i = 0; i < adjusted.length; i++) {
       if (i == ind) {
-        adjusted[i] == data;
-        console.log("Here");
+        adjusted[i][property] = data;
       }
-      console.log(adjusted[i]);
     }
-    console.log(adjusted);
+    setExperience(adjusted);
   };
   return (
     <>
@@ -112,10 +109,15 @@ function App() {
           <Skills skills={skills} changeSkills={changeSkills}></Skills>
           {/* Goal right now is to be able to store the data of each experience in an array*/}
           {experience.map((exp, index) => {
+            console.log(experience[index]);
             return (
               <Experience
                 key={index}
                 index={index}
+                title={experience[index].Title}
+                company={experience[index].Company}
+                date={experience[index].Date}
+                description={experience[index].Description}
                 changeData={changeExperience}
               ></Experience>
             );
