@@ -33,10 +33,8 @@ const InputComponent = ({
 // Display component
 const DisplayComponent = ({ type, inputValue }) => {
   return (
-    <div>
-      <p>
-        {type}: {inputValue}
-      </p>
+    <div className={"display" + type}>
+      <p>{inputValue}</p>
     </div>
   );
 };

@@ -11,20 +11,12 @@ import Skills from "./components/Skills";
 import Experience from "./components/Experience";
 import { v4 as uuidv4 } from "uuid";
 
-// TODO:
-// need a button that can generate a component and a display component when clicked
-
-// have the button, now need to create the function that generates those components. This function will likely be a part of the app.jsx, as we need to generate these components in the parent component
-
-// in order to generate components, we can use a state variable that contains a list of the components that we want to generate, which gets passed into a .map function to generate all the components we want. then, we have the add component function, that creates the new component and then calls the setter function. in order to ensure that we don't overlap keys, we can ensure that the key being used for that component is generated with the name of that component in mind (e.g. key={categoryName} or something)
-
-// now to remove these components, we can filter that component by looking for the key out of the list of components that we want to generate so that we can re-render the DOM.
-
-// within a experience component, we want to have the title, company, date, and description
+// TODO: Now to format and display the text itself
 
 function App() {
   const [fullName, setFullName] = useState("Justin Cheok");
   const [location, setLocation] = useState("Brooklyn, NY");
+  const [phoneNum, setPhoneNum] = useState("111-111-1111");
   const [contact, setContact] = useState("example@email.com");
   const [link, setLink] = useState("cheok.works");
   const [schoolName, setSchool] = useState("New York University");
@@ -43,6 +35,9 @@ function App() {
   const changeLocation = (e) => {
     setLocation(e.target.value);
   };
+  const changePhoneNum = (e) => {
+    setPhoneNum(e.target.value);
+  };
   const changeLink = (e) => {
     setLink(e.target.value);
   };
@@ -58,7 +53,6 @@ function App() {
   const changeSkills = (e) => {
     setSkills(e.target.value);
   };
-  // Also stores the array of data?
   const addExperience = (e) => {
     if (experience.length == 4) {
       alert("Max 4 experiences!");
@@ -98,6 +92,11 @@ function App() {
             link={link}
             changeLink={changeLink}
           ></Contact>
+          <InputComponent
+            label="Phone Number"
+            inputValue={phoneNum}
+            onInputChange={changePhoneNum}
+          ></InputComponent>
           <Education
             school={schoolName}
             changeSchool={changeSchool}
@@ -107,7 +106,7 @@ function App() {
             changeCoursework={changeCoursework}
           ></Education>
           <Skills skills={skills} changeSkills={changeSkills}></Skills>
-          {/* Goal right now is to be able to store the data of each experience in an array*/}
+          <h3>Experiences: </h3>
           {experience.map((exp, index) => {
             console.log(experience[index]);
             return (
@@ -126,30 +125,73 @@ function App() {
           <button onClick={removeExperience}>Remove</button>
         </div>
         <div className="preview">
-          <div className="header">
+          <div className="paper">
             <DisplayComponent
               type="Name"
               inputValue={fullName}
             ></DisplayComponent>
+            {/* RIGHT HERE, style contact info  */}
+            <div className="contactInfo">
+              <DisplayComponent
+                type="Contact"
+                inputValue={contact}
+              ></DisplayComponent>
+              <DisplayComponent
+                type="Phone"
+                inputValue={phoneNum}
+              ></DisplayComponent>
+              <DisplayComponent
+                type="Location"
+                inputValue={location}
+              ></DisplayComponent>
+              <DisplayComponent
+                type="Link"
+                inputValue={link}
+              ></DisplayComponent>
+            </div>
             <DisplayComponent
-              type="Contact"
-              inputValue={contact}
+              type="School"
+              inputValue={schoolName}
             ></DisplayComponent>
             <DisplayComponent
-              type="Location"
-              inputValue={location}
+              type="Major"
+              inputValue={major}
             ></DisplayComponent>
-            <DisplayComponent type="Link" inputValue={link}></DisplayComponent>
+            <strong>Relevant Coursework: </strong>
+            <DisplayComponent
+              type="Relevant Coursework"
+              inputValue={coursework}
+            ></DisplayComponent>
+            <strong>Skills:</strong>
+            <DisplayComponent
+              type="Skills"
+              inputValue={skills}
+            ></DisplayComponent>
+            <strong>Experience:</strong>
+            {experience.map((exp, index) => {
+              console.log(experience[index]);
+              return (
+                <div>
+                  <DisplayComponent
+                    type="Title"
+                    inputValue={experience[index].Title}
+                  ></DisplayComponent>
+                  <DisplayComponent
+                    type="Company"
+                    inputValue={experience[index].Company}
+                  ></DisplayComponent>
+                  <DisplayComponent
+                    type="Date"
+                    inputValue={experience[index].Date}
+                  ></DisplayComponent>
+                  <DisplayComponent
+                    type="Description"
+                    inputValue={experience[index].Description}
+                  ></DisplayComponent>
+                </div>
+              );
+            })}
           </div>
-          <DisplayComponent
-            type="School"
-            inputValue={schoolName}
-          ></DisplayComponent>
-          <DisplayComponent type="Major" inputValue={major}></DisplayComponent>
-          <DisplayComponent
-            type="Relevant Coursework"
-            inputValue={coursework}
-          ></DisplayComponent>
         </div>
       </div>
     </>

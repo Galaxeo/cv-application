@@ -13,9 +13,10 @@ function Experience({ title, company, date, description, index, changeData }) {
     console.log(title);
     return (
       <>
-        <h3>
-          Experience<Edit status={display} func={changeDisplay}></Edit>
-        </h3>
+        <h4>
+          Experience {index + 1}{" "}
+          <Edit status={display} func={changeDisplay}></Edit>
+        </h4>
         <InputComponent
           inputValue={title}
           onInputChange={(e) => changeData(index, "Title", e.target.value)}
