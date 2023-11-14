@@ -68,5 +68,16 @@ html, body, #app, #app>div, #root{
 /*Style contact info further */
 .contactInfo{
   display: flex;
-  gap: calc(30vw * 0.0264 * 2);
+  gap: calc(30vw * 0.01 * 2);
+}
+.header {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: calc(30vw * 0.01 * 2);
+}
+.row {
+  display: flex;
+  font-size: calc(30vw * 0.0264);
+  gap: calc(9vw * 0.0264);
 }

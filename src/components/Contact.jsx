@@ -11,6 +11,8 @@ function Contact({
   changeLocation,
   link,
   changeLink,
+  phoneNum,
+  changePhoneNum,
 }) {
   const [display, setDisplay] = useState(true);
   function changeDisplay() {
@@ -33,6 +35,12 @@ function Contact({
           onInputChange={changeContact}
           label="Contact"
           id="contact"
+        ></InputComponent>
+        <InputComponent
+          inputValue={phoneNum}
+          onInputChange={changePhoneNum}
+          label="Phone Number"
+          id="phoneNum"
         ></InputComponent>
         <InputComponent
           inputValue={location}

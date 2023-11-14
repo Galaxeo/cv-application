@@ -7,6 +7,8 @@ function Education({
   changeSchool,
   major,
   changeMajor,
+  grad,
+  changeGrad,
   coursework,
   changeCoursework,
 }) {
@@ -30,6 +32,12 @@ function Education({
           inputValue={major}
           onInputChange={changeMajor}
           label="Major"
+          id="major"
+        ></InputComponent>
+        <InputComponent
+          inputValue={grad}
+          onInputChange={changeGrad}
+          label="Graduation Date"
           id="major"
         ></InputComponent>
         <InputComponent

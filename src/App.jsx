@@ -21,6 +21,7 @@ function App() {
   const [link, setLink] = useState("cheok.works");
   const [schoolName, setSchool] = useState("New York University");
   const [major, setMajor] = useState("Computer Science");
+  const [grad, setGrad] = useState("Fall 2023");
   const [coursework, setCoursework] = useState(
     "Data Structures and Algorithms"
   );
@@ -49,6 +50,9 @@ function App() {
   };
   const changeCoursework = (e) => {
     setCoursework(e.target.value);
+  };
+  const changeGrad = (e) => {
+    setGrad(e.target.value);
   };
   const changeSkills = (e) => {
     setSkills(e.target.value);
@@ -91,17 +95,16 @@ function App() {
             changeLocation={changeLocation}
             link={link}
             changeLink={changeLink}
+            phoneNum={phoneNum}
+            changePhoneNum={changePhoneNum}
           ></Contact>
-          <InputComponent
-            label="Phone Number"
-            inputValue={phoneNum}
-            onInputChange={changePhoneNum}
-          ></InputComponent>
           <Education
             school={schoolName}
             changeSchool={changeSchool}
             major={major}
             changeMajor={changeMajor}
+            grad={grad}
+            changeGrad={changeGrad}
             coursework={coursework}
             changeCoursework={changeCoursework}
           ></Education>
@@ -117,6 +120,7 @@ function App() {
                 company={experience[index].Company}
                 date={experience[index].Date}
                 description={experience[index].Description}
+                location={experience[index].Location}
                 changeData={changeExperience}
               ></Experience>
             );
@@ -126,29 +130,32 @@ function App() {
         </div>
         <div className="preview">
           <div className="paper">
-            <DisplayComponent
-              type="Name"
-              inputValue={fullName}
-            ></DisplayComponent>
-            {/* RIGHT HERE, style contact info  */}
-            <div className="contactInfo">
+            <div className="header">
               <DisplayComponent
-                type="Contact"
-                inputValue={contact}
+                type="Name"
+                inputValue={fullName}
               ></DisplayComponent>
-              <DisplayComponent
-                type="Phone"
-                inputValue={phoneNum}
-              ></DisplayComponent>
-              <DisplayComponent
-                type="Location"
-                inputValue={location}
-              ></DisplayComponent>
-              <DisplayComponent
-                type="Link"
-                inputValue={link}
-              ></DisplayComponent>
+              {/* RIGHT HERE, style contact info  */}
+              <div className="contactInfo">
+                <DisplayComponent
+                  type="Contact"
+                  inputValue={contact}
+                ></DisplayComponent>
+                <DisplayComponent
+                  type="Phone"
+                  inputValue={phoneNum}
+                ></DisplayComponent>
+                <DisplayComponent
+                  type="Location"
+                  inputValue={location}
+                ></DisplayComponent>
+                <DisplayComponent
+                  type="Link"
+                  inputValue={link}
+                ></DisplayComponent>
+              </div>
             </div>
+            <strong>Education: </strong>
             <DisplayComponent
               type="School"
               inputValue={schoolName}
@@ -157,10 +164,14 @@ function App() {
               type="Major"
               inputValue={major}
             ></DisplayComponent>
-            <strong>Relevant Coursework: </strong>
+            <DisplayComponent
+              type="Expected Graduation Date:"
+              inputValue={"Graudation Date: " + grad}
+            ></DisplayComponent>
+            <strong></strong>
             <DisplayComponent
               type="Relevant Coursework"
-              inputValue={coursework}
+              inputValue={"Relevant Coursework: " + coursework}
             ></DisplayComponent>
             <strong>Skills:</strong>
             <DisplayComponent
@@ -171,14 +182,22 @@ function App() {
             {experience.map((exp, index) => {
               console.log(experience[index]);
               return (
-                <div>
-                  <DisplayComponent
-                    type="Title"
-                    inputValue={experience[index].Title}
-                  ></DisplayComponent>
+                <div className="exp">
+                  <strong>
+                    <em className="row">
+                      <DisplayComponent
+                        type="Title"
+                        inputValue={experience[index].Title + " at "}
+                      ></DisplayComponent>
+                      <DisplayComponent
+                        type="Company"
+                        inputValue={experience[index].Company}
+                      ></DisplayComponent>
+                    </em>
+                  </strong>
                   <DisplayComponent
                     type="Company"
-                    inputValue={experience[index].Company}
+                    inputValue={experience[index].Location}
                   ></DisplayComponent>
                   <DisplayComponent
                     type="Date"

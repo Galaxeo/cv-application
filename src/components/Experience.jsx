@@ -1,7 +1,15 @@
 import Edit from "./Edit";
 import { InputComponent } from "./Io";
 import { useState } from "react";
-function Experience({ title, company, date, description, index, changeData }) {
+function Experience({
+  title,
+  company,
+  date,
+  location,
+  description,
+  index,
+  changeData,
+}) {
   const [display, setDisplay] = useState(true);
   function changeDisplay() {
     setDisplay(!display);
@@ -30,6 +38,12 @@ function Experience({ title, company, date, description, index, changeData }) {
           id="expCompany"
         ></InputComponent>
         <InputComponent
+          inputValue={location}
+          onInputChange={(e) => changeData(index, "Location", e.target.value)}
+          label="Location"
+          id="expLocation"
+        ></InputComponent>
+        <InputComponent
           inputValue={date}
           onInputChange={(e) => changeData(index, "Date", e.target.value)}
           label="Date"
@@ -49,9 +63,10 @@ function Experience({ title, company, date, description, index, changeData }) {
   } else {
     return (
       <>
-        <h3>
-          Experience<Edit status={display} func={changeDisplay}></Edit>
-        </h3>
+        <h4>
+          Experience {index + 1}
+          <Edit status={display} func={changeDisplay}></Edit>
+        </h4>
       </>
     );
   }
